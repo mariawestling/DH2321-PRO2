@@ -272,11 +272,15 @@ function myChart() {
 				.on('click', function (d) {
 					headers.attr('class', 'header');
 					if (sortAscending) {
-						rows.sort(function(a, b) { return b[d] < a[d]; });
+						rows.sort(function(a, b) {
+
+						console.log("a",a[d]);
+						console.log("b",b[d]);
+						 return parseFloat(b[d]) < parseFloat(a[d]); });
 						sortAscending = false;
 						this.className = 'aes';
 					} else {
-						rows.sort(function(a, b) { return b[d] > a[d]; });
+						rows.sort(function(a, b) { return parseFloat(b[d]) > parseFloat(a[d]); });
 						sortAscending = true;
 						this.className = 'des';
 					}
@@ -293,13 +297,13 @@ function myChart() {
 				.append('tr')
 				.on({'mouseover': function(d) {
 					parcoords.highlight([d]);
-					console.log("d", d.CountryID);
+					//console.log("d", d.CountryID);
 					cID = String(d.CountryID)
 					d3.selectAll('.datamaps-subunit.'+ cID)
 						.style("fill", "#FFA000");
 					},
 					'mouseout': function(d) {
-						console.log("mouseout", cID);
+						//console.log("mouseout", cID);
 						parcoords.unhighlight();
 						d3.selectAll('.datamaps-subunit.'+cID)
 						.style("fill", "#009688");
