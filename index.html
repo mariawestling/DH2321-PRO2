@@ -1,0 +1,160 @@
+<!DOCTYPE hmtl>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<title>IVIS Project 2</title>
+
+			<!-- Bootstrap CSS -->
+			<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+			<!-- Google font API -->
+			<link rel="stylesheet" type="text/css"
+         	 href="https://fonts.googleapis.com/css?family=Roboto">
+
+			<!-- Stylesheet -->
+			<link rel="stylesheet" href="style.css">
+
+		</head>
+		<body>
+			<div id="container-fluid wrapper">
+				<div id="header" onClick="showFunction('home')">
+					<h2 vertical-align="center"> IVIS Project 2 </h2>
+				</div>
+
+				<div id="home">
+					<div class="col-md-12" id="choice">
+						<div class="col-md-6 active" id="path1" onclick="showFunction('myViz')"> Show Visualization
+						</div>
+						<div class="col-md-6" id="path2" onclick="showFunction('analyticTrail')"> Show Analytic Trails
+						</div>
+					</div>
+				</div>
+				<div id="myViz" style="display: block;">
+
+					<div class="col-md-12" id="butts" style="align: center;" show="false">
+							<button class="btn-primary" id="1995 - 1999"> 1995 - 1999
+							</button>
+							<button class="btn-primary" id="2000 - 2004"> 2000 - 2004
+							</button>
+							<button class="btn-primary" id="2005 - 2009"> 2005 - 2009
+							</button>
+							<button class="btn-primary active" id="2010 - 2014"> 2010 - 2014
+							</button>
+					</div>
+					<div class="col-md-12">
+						
+						<div id="vis" class="parcoords col-md-6">
+
+						</div>
+						<div id="world" class="col-md-6">
+						</div>
+					</div>
+					<div id="grid" class="col-md-12">
+					</div>
+				</div>
+				<div id="analyticTrail" style="display: none;">
+					<div class="col-md-12" id="title">
+						<div class="col-md-3" id="RQ"> <h3><strong>Research question </strong></h3>
+						</div>
+						<div class="col-md-9" id="Q">
+							<h3 id="titled">
+								 What correlations are there (if any) between having confidence in you country, its government, feeling secure and being open to/trusting of others? 
+
+								What other factors might play a part? How have these changed over time?
+							</h3>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-3" id="TR1"> <h3><strong>Trail #1 WVS </strong></h3>
+						</div>
+						<div class="col-md-9" id="AN">
+							<div id="parag">
+								At the WVS website, I go to the data and chose a wave. 
+								<img src="images/"/>
+								It's not possible to chose all countries available at once so I have to patiently click all of the countries as I really want to get as much data as possible to see if I can find an answer to my question.
+								<img src="images/"/>
+								I then look at some surveys that correspond to my question. Such as questions about the government, trust in people, satisfaction in life, nationality pride, the press and human rights.
+								<img src="images/"/>
+								Then I look at the countries threw the years (for as many waves the country has data that is)
+								<img src="images/"/>
+								It isn't easy to get an overview at this site. The data is very centered on the country and it's hard to compare different variables. Therefore it's hard to answer my question. I did find some small correlation between confidence in the government and the general trust.
+								Even though I couldn't fully answer my question using this site's visualizations, it was intresting to see the development in the different waves for countries.
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-3" id="TR"> <h3><strong>Trail #2 my visualization </strong></h3>
+						</div>
+						<div class="col-md-9" id="AN">
+							<div id="parag">
+								In my visualization you can brush the different variables to see if perhaps there's a correlation between general trust in people and a perceived democratic government.
+								<img src="images/"/>
+								The brushed data gathers in a list below the parallel coordinates were sortable data is available for further correlations.
+								<img src="images/"/>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-3" id="TR"> <h3><strong>What can be learned? </strong></h3>
+						</div>
+						<div class="col-md-9" id="AN">
+							<div id="parag">
+								One thing I have not incorporated is the ability to choose which countries you are interested in other than brushing. Similar to the WVS page were it is the first thing you do really. And being able to compare these over time. 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+
+		<!--<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+		<script src="https://d3js.org/topojson.v2.min.js"></script>
+		<script src="topojson.js"></script>
+		<script src="datamaps.js"></script>-->
+		<script src="d3.min.js"></script>
+		<script src="d3.v3.js"></script>
+		<script src="topojson.min.js"></script>
+		<script src="datamaps.world.min.js"></script>
+		<script src="d3.parcoords.js"></script>
+		<!--<script src="divgrid.js"></script>-->
+		<script src="pro2functions.js"></script>
+		<script>
+			d3.select('#choice')
+				.selectAll('div')
+				.on('click', function() {
+					d3.selectAll('div').classed('active', false);
+
+					var div = d3.select(this);
+
+					div.classed('active', true);
+
+				});
+
+			function showFunction(buttClicked) {
+
+
+				if (buttClicked === 'myViz') {
+					var hide = document.getElementById('analyticTrail');
+					hide.style.display = 'none'; //hide analytic trail
+					var deactive = document.getElementById('path2');
+
+					var x = document.getElementById('myViz');
+					x.style.display = 'block'; //shows the viz page
+
+				} else {
+					console.log(buttClicked)
+					var hide = document.getElementById('myViz');
+					hide.style.display = 'none'; //hides the viz page
+					var deactive = document.getElementById('path1');
+
+					var x = document.getElementById('analyticTrail');
+					x.style.display = 'block'; //shows analyticTrails page
+
+				}
+			}
+		</script>
+	</html>
