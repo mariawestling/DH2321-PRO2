@@ -236,11 +236,23 @@ function myChart() {
 					headers.attr('class', 'header');
 					if (sortAscending) {
 						rows.sort(function(a, b) {
-						 return parseFloat(b[d]) < parseFloat(a[d]); });
+							if (isNaN(parseFloat(a[d]))) {
+								return b[d] < a[d];
+							} else {
+						 		return parseFloat(b[d]) < parseFloat(a[d]); 
+						 	}
+						});
+
 						sortAscending = false;
 						this.className = 'aes';
 					} else {
-						rows.sort(function(a, b) { return parseFloat(b[d]) > parseFloat(a[d]); });
+						rows.sort(function(a, b) { 
+							if (isNaN(parseFloat(a[d]))) {
+								return b[d] > a[d];
+							} else {
+						 		return parseFloat(b[d]) > parseFloat(a[d]); 
+						 	}	
+						});
 						sortAscending = true;
 						this.className = 'des';
 					}
