@@ -33,7 +33,6 @@ function myChart() {
 			                	if (!dataset[dID]){  //if the country is not dataset, unhighlight pc for less confusion
 			                		parcoords.unhighlight();
 			                	} else { //highlights pc when you hover on a country that is in dataset
-				                	console.log("d3 select", d3.select('td'));
 				                	countryHighlight = dataset[dID].countryData;
 				                	parcoords.highlight([countryHighlight]);
 				                	//d3.select('td')
@@ -217,42 +216,6 @@ function myChart() {
 				
 		// 	});
 		var list = ["CountryID", "SatisfactionLife", "DemocraticGov", "NationalityPride", "GNI/Capita($K)", "ConfidenceInPress", "WillingnessToFight", "HumanRights", "Trust"];
-		function inList(data) {
-			for (var i=0; i < list.length; i++) {
-				console.log("i", i);
-				console.log("lista", list[i]);
-				console.log("data", data);
-				if(list[i] == data) {
-					return true;
-				} else {
-					return false;
-				}
-			} 
-		}
-		function inList1(data) {
-			for (var i=0; i < list.length; i++) {
-				console.log("i", i);
-				console.log("lista", list[i]);
-				console.log("data", data);
-				if(list[i] == data) {
-					return true;
-				} else {
-					return false;
-				}
-			} 
-		}
-		function inList2(data) {
-			for (var i=0; i < list.length; i++) {
-				console.log("i", i);
-				console.log("lista", list[i]);
-				console.log("data", data);
-				if(list[i] == data) {
-					return true;
-				} else {
-					return false;
-				}
-			} 
-		}
 
 		var dataTable = function dataTable(data) {
 			document.getElementById('grid').innerHTML = "";
@@ -273,9 +236,6 @@ function myChart() {
 					headers.attr('class', 'header');
 					if (sortAscending) {
 						rows.sort(function(a, b) {
-
-						console.log("a",a[d]);
-						console.log("b",b[d]);
 						 return parseFloat(b[d]) < parseFloat(a[d]); });
 						sortAscending = false;
 						this.className = 'aes';
@@ -297,13 +257,11 @@ function myChart() {
 				.append('tr')
 				.on({'mouseover': function(d) {
 					parcoords.highlight([d]);
-					//console.log("d", d.CountryID);
 					cID = String(d.CountryID)
 					d3.selectAll('.datamaps-subunit.'+ cID)
 						.style("fill", "#FFA000");
 					},
 					'mouseout': function(d) {
-						//console.log("mouseout", cID);
 						parcoords.unhighlight();
 						d3.selectAll('.datamaps-subunit.'+cID)
 						.style("fill", "#009688");
