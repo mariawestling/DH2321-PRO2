@@ -70,9 +70,6 @@ h3 {
 	letter-spacing: 1px;
 }
 
-img {
-	padding: 10px;
-}
 
 #titled {
 	font-weight: normal;
@@ -185,7 +182,7 @@ div.active {
   cursor: default;
   font-family: open sans;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 10px;
   margin-bottom: 20px;
 }
 
